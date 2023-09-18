@@ -1,4 +1,5 @@
-# img-veditor
+#  ![logo (1)](https://github.com/bravoPan/img-veditor/assets/22274175/93bd1a6f-88ac-442d-94b6-bcaad90a3808) 
+
 A automation tool for editing images in batch to make short video
 
 ## Test
