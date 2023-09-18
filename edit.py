@@ -1,11 +1,15 @@
 import os
 from moviepy.editor import *
+from moviepy.audio.fx import *
 
 fps_rate = 0.4
 EFFECT_DURATION = 0.5
 
+images_path = "test"
+audio_file_path = "audio/test_audio.mp3"
+
 images = []
-for img in os.listdir("test"):
+for img in os.listdir(images_path):
     if img.endswith("png") or img.endswith("jpeg") or img.endswith("jpg"):
         images.append(img)
 
@@ -13,8 +17,7 @@ for idx, img in enumerate(images):
     cur_fps_rate = fps_rate
     if idx == 0 or idx == len(images)-1:
         cur_fps_rate = 1/(1/fps_rate - EFFECT_DURATION)
-        print(cur_fps_rate)
-    clip = ImageSequenceClip(["test/"+img], fps=cur_fps_rate)
+    clip = ImageSequenceClip([images_path+"/"+img], fps=cur_fps_rate)
     clip.write_videofile("output/stage/"+str(idx)+".mp4")
 
 video_clips = [i for i in os.listdir("output/stage/")]
@@ -30,4 +33,8 @@ for video in video_clips[1:-1]:
     idx += video.duration - EFFECT_DURATION
 
 final_video = CompositeVideoClip(video_fx_list)
-final_video.write_videofile("output/"+"test.mp4", fps=24)
+audioclip = AudioFileClip(audio_file_path).subclip(0, final_video.duration)
+audioclip = audioclip.volumex(0.3)
+
+audio_video = final_video.set_audio(audioclip)
+audio_video.write_videofile("output/test.mp4", fps=24, codec='libx264', audio_codec='aac')
