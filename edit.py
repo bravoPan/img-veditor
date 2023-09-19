@@ -15,8 +15,8 @@ for img in os.listdir(images_path):
 
 for idx, img in enumerate(images):
     cur_fps_rate = fps_rate
-    if idx == 0 or idx == len(images)-1:
-        cur_fps_rate = 1/(1/fps_rate - EFFECT_DURATION)
+    if idx == len(images)-1:
+        cur_fps_rate = 1/(1/fps_rate - 2*EFFECT_DURATION)
     clip = ImageSequenceClip([images_path+"/"+img], fps=cur_fps_rate)
     clip.write_videofile("output/stage/"+str(idx)+".mp4")
 
@@ -28,7 +28,7 @@ video_clips = [VideoFileClip(i) for i in video_clips]
 video_fx_list = [video_clips[0]]
 
 idx = video_clips[0].duration - EFFECT_DURATION
-for video in video_clips[1:-1]:
+for video in video_clips[1:]:
     video_fx_list.append(video.set_start(idx).crossfadein(EFFECT_DURATION))
     idx += video.duration - EFFECT_DURATION
 

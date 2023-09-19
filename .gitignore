@@ -1,2 +1,2 @@
 *.DS_STORE
-output/stage/*.mp4
+*.mp4
