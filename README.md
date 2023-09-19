@@ -10,7 +10,10 @@ https://github.com/bravoPan/img-veditor/assets/22274175/42958e60-7832-4a37-be59-
 
 
 ## Install
-make sure `ffmpeg` on your machine.
+- make sure `ffmpeg` on your machine.
+- `conda env create -f environment.yml` 
+- `conda activate veditor` activate your env
+- `python edit.py` run the script will produce the video.
 
-Use `conda env create -f environment.yml` and activate your env `conda activate veditor`, then run the script `python edit.py` will produce the video.
-
+## Suggestion
+For mobile device the resolution `768X1280`
